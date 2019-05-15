@@ -28,7 +28,7 @@ class LineChart extends AbstractChart {
           }
 
           onDataPointClick({
-            value: x,
+            value: dataset.data_real[i],
             dataset,
             getColor: opacity => this.getColor(dataset, opacity)
           });
