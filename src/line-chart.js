@@ -4,6 +4,7 @@ import {
   Svg, Circle, Polygon, Polyline, Path, Rect, G, Text
 } from 'react-native-svg';
 import AbstractChart from './abstract-chart';
+import { moneyFormat } from '../../../src/config/CoreConfig';
 
 class LineChart extends AbstractChart {
   getColor = (dataset, opacity) => (dataset.color || this.props.chartConfig.color)(opacity);
@@ -33,12 +34,19 @@ class LineChart extends AbstractChart {
             getColor: opacity => this.getColor(dataset, opacity)
           });
         };
+
         output.push(
-          <Text fill="black" fontSize="8" fontWeight="bold" x={cx} y={cy - 10} textAnchor="middle">
+          <Text fill="black" fontSize="8" fontWeight="bold" x={cx} y={cy - 30} textAnchor="middle">
             {dataset.data_real[i].tipo}
           </Text>
         );
-        output.push(<Circle cx={cx} cy={cy} r="6" fill={dataset.dot_color[i]} onPress={onPress} />);
+
+        output.push(
+          <Text fill="black" fontSize="6" x={cx} y={cy - 20} textAnchor="middle">
+            {moneyFormat(dataset.data_real[i].fat_Vlr)}
+          </Text>
+        );
+        output.push(<Circle cx={cx} cy={cy-10} r="6" fill={dataset.dot_color[i]} onPress={onPress} />);
         output.push(
           <Circle cx={cx} cy={cy} r="12" fill={this.getColor(dataset, 0)} onPress={onPress} />
         );
